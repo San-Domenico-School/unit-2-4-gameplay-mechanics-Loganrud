@@ -11,38 +11,42 @@ using UnityEngine.InputSystem;
 public class Rotator : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
-    private PlayerInputActions InputActions;
+    private PlayerInputActions inputAction;
     private float moveDirection;
 
     private void Awake()
     {
-        
+        inputAction = new PlayerInputActions();
     }
 
-    // Start is called before the first frame update
+    // Rotate the focalpoints which the camera is attached to
     private void Update()
     {
-        
+        transform.Rotate(Vector3.up, moveDirection * rotationSpeed * Time.deltaTime);
     }
 
-    // Update is called once per frame
+    // Add OnMovement events to inputAction's Player's movement
     private void OnEnable()
     {
-        
+        inputAction.Enable();
+        inputAction.Player.Movement.performed += OnMovementPreformed;
+        inputAction.Player.Movement.canceled += OnMovementCanceled;
     }
 
     private void OnDisable()
     {
-    
+        inputAction.Disable();
+        inputAction.Player.Movement.performed -= OnMovementPreformed;
+        inputAction.Player.Movement.canceled -= OnMovementCanceled;
     }
 
     private void OnMovementPreformed(InputAction.CallbackContext value)
     {
-
+        moveDirection = value.ReadValue<Vector2>().x;
     }
 
     private void OnMovementCanceled(InputAction.CallbackContext value)
     {
-
+        moveDirection = 0.0f;
     }
 }
