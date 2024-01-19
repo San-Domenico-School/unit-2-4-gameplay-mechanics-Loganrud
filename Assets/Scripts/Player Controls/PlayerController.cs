@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRB;
     private SphereCollider playerCollider;
     private Light powerUpIndicator;
-    private PlayerInputActions inputActions;
     private Transform focalpoint;
     private float moveForceMagnitude;
     private float moveDirection;
@@ -40,12 +39,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        inputAction.Enable();
+        inputAction.Player.Movement.performed += OnMovementPreformed;
+        inputAction.Player.Movement.canceled += OnMovementCanceled;
     }
 
     private void OnDisable()
     {
-        
+        inputAction.Disable();
+        inputAction.Player.Movement.performed -= OnMovementPreformed;
+        inputAction.Player.Movement.canceled -= OnMovementCanceled;
     }
 
     // Update is called once per frame
