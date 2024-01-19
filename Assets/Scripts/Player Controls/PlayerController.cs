@@ -31,25 +31,21 @@ public class PlayerController : MonoBehaviour
     {
         //Moves the player to the next level after current level ends
         DontDestroyOnLoad(gameObject);
-        playerCollider.material.bounciness = 0.4f;
-        powerUpIndicator.intensity = 0.0f;
         playerRB = GetComponent<Rigidbody>();
         playerCollider = GetComponent<SphereCollider>();
         powerUpIndicator = GetComponent<Light>();
+        playerCollider.material.bounciness = 0.4f;
+        powerUpIndicator.intensity = 0.0f;
     }
 
     private void OnEnable()
     {
-        inputAction.Enable();
-        inputAction.Player.Movement.performed += OnMovementPreformed;
-        inputAction.Player.Movement.canceled += OnMovementCanceled;
+        
     }
 
     private void OnDisable()
     {
-        inputAction.Disable();
-        inputAction.Player.Movement.performed -= OnMovementPreformed;
-        inputAction.Player.Movement.canceled -= OnMovementCanceled;
+        
     }
 
     // Update is called once per frame
@@ -79,12 +75,19 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        
+        if (focalpoint != null)
+        {
+            playerRB.AddForce(focalpoint.forward * moveForceMagnitude * moveDirection);
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnColliderEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag ("Ground"))
+        {
+            playerCollider.material.bounciness = GameManager.Instance.playerBounce;
+            AssignLevelValues();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
