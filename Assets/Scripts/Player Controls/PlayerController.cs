@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        
+        inputAction = new PlayerInputActions();
     }
 
     // Start is called before the first frame update
@@ -69,25 +69,28 @@ public class PlayerController : MonoBehaviour
 
     private void AssignLevelValues()
     {
-        GameManager.Instance.playerScale = transform.localScale;
-        GameManager.Instance.playerMass = playerRB.mass;
-        GameManager.Instance.playerDrag = playerRB.drag;
-        GameManager.Instance.playerMoveForce = moveForceMagnitude;
-        focalpoint = GameObject.Find("Focal Point").transform;
+        transform.localScale = GameManager.Instance.playerScale;
+        playerRB.mass = GameManager.Instance.playerMass;
+        playerRB.drag = GameManager.Instance.playerDrag;
+        moveForceMagnitude = GameManager.Instance.playerMoveForce;
+        focalpoint = GameObject.Find("FocalPoint").transform;
     }
 
     private void Move()
     {
         if (focalpoint != null)
         {
+            Debug.Log(focalpoint.forward * moveForceMagnitude * moveDirection);
             playerRB.AddForce(focalpoint.forward * moveForceMagnitude * moveDirection);
         }
     }
 
-    private void OnColliderEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag ("Ground"))
+        if (collision.gameObject.CompareTag ("Startup"))
         {
+            
+            collision.gameObject.tag = "Ground";
             playerCollider.material.bounciness = GameManager.Instance.playerBounce;
             AssignLevelValues();
         }
