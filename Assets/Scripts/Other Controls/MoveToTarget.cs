@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /*************
- * This is a component of the Enemy GameObject presumably.
+ * This is a component of the Enemy or obstacle GameObject presumably.
  * This tells the enemies where the player, or target is and tells the to move
  * towards it
  * Logan Rudsenske 22/1/24
@@ -19,17 +19,19 @@ public class MoveToTarget : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
+        target = GameObject.Find("Player");
+        targetRB = target.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        
+        MoveTowardsTarget();
+        Debug.Log(target.gameObject.name);
     }
 
     private void MoveTowardsTarget()
     {
-
+        navMeshAgent.SetDestination(targetRB.transform.position);
     }
 }
