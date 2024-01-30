@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameObject.Find("PLayer") && FindObjectsOfType<IceSphereController>().Length < 0)
+        if (GameObject.Find("Player") && FindObjectsOfType<IceSphereController>().Length <= 0)
         {
             SpawnIceWave();
         }
@@ -51,7 +51,15 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnIceWave()
     {
-        
+        for (int i = 0; i < waveNumber; i++)
+        {
+            Instantiate(iceSphere, SetRandomPosition(1.6f), iceSphere.transform.rotation);
+        }
+
+        if (waveNumber < maximumWave)
+        {
+            waveNumber += increaseEachWave;
+        }
     }
 
     private void SetObjectActive(float byWaveProbability, GameObject obj)
@@ -61,9 +69,10 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 SetRandomPosition(float posY)
     {
-        return new Vector3();
+        Debug.Log(islandSize);
         float Randomx = Random.Range(-islandSize.x / 2, islandSize.x / 2);
         float Randomz = Random.Range(-islandSize.z / 2, islandSize.z / 2);
+        return new Vector3(Randomx, posY, Randomz);
     }
 
     private IEnumerator CountdownTimer(string objectTag)
