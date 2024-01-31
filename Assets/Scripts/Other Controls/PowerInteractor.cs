@@ -21,9 +21,23 @@ public class PowerInteractor : MonoBehaviour
         iceSphereController = GetComponent<IceSphereController>();
     }
 
-    // Update is called once per frame
+    // Determine if the iceshpere collides with the player, and then determine if the player has a powerup
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag ("Player") )
+        {
+            GameObject player = collision.gameObject;
+            Rigidbody playerRB = player. GetComponent<Rigidbody>();
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            if (player.GetComponent<PlayerController>().hasPowerUp)
+            {
+                iceSphereRB.AddForce(-direction * playerRB.mass * GameManager.Instance.playerRepelForce, ForceMode.Impulse);
+            }
+            else
+            {
+                playerRB.AddForce(direction, ForceMode.VelocityChange);
+            }
+        }
     }
 }
