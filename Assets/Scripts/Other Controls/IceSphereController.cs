@@ -36,14 +36,15 @@ public class IceSphereController : MonoBehaviour
 
     private void Dissolution()
     {
-        float Volume = 4.0f / 3.0f * Mathf.PI * Mathf.Pow(transform.localScale.x, 3);
+        float volume = 4.0f / 3.0f * Mathf.PI * Mathf.Pow(transform.localScale.x, 3);
         int numOfIceSphereInScene = FindObjectsOfType<IceSphereController>().Length;
-        if (Volume < 0.8f && numOfIceSphereInScene > 1)
+        if (volume < 0.8f && numOfIceSphereInScene > 1)
         {
-            iceVFX.Stop();
+            //iceVFX.Stop();
         }
 
-        if (Volume < minimumVolume)
+        Debug.Log(volume);
+        if (volume < minimumVolume)
         {
             Destroy(gameObject);
         }
