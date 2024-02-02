@@ -36,7 +36,7 @@ public class PowerInteractor : MonoBehaviour
             }
             else
             {
-                playerRB.AddForce(direction, ForceMode.VelocityChange);
+                playerRB.AddForce(direction, ForceMode.Force);
             }
         }
     }
