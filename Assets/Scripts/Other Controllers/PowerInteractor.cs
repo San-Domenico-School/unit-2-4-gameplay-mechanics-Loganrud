@@ -36,7 +36,7 @@ public class PowerInteractor : MonoBehaviour
             }
             else
             {
-                playerRB.AddForce(direction, ForceMode.Force);
+                playerRB.AddForce(direction * iceSphereRB.mass, ForceMode.Force);
             }
         }
     }
