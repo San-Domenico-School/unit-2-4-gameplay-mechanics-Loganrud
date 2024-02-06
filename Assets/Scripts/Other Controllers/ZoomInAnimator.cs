@@ -9,22 +9,30 @@ public class ZoomInAnimator : MonoBehaviour
     private float zoomInRate = 1.06f;
     private float zoomInFrequency = 0.03f;
 
-    // Start is called before the first frame update
+    // Store the desired scale, set the initial scale, and then call ZoomIn
     private void OnEnable()
     {
-        desiredScale = transform.localScale;
-        initialScale = transform.localScale;
-        InvokeRepeating
+        transform.localScale = desiredScale;
+        transform.localScale = initialScale;
+        InvokeRepeating("ZoomIn", 0.0f, zoomInRate);
     }
-
-    // Update is called once per frame
+ 
+    // Resets the current scale to the desired scale
     private void OnDisable()
     {
-        
+        transform.localScale = desiredScale;
     }
 
+    // Slowly grow the scale from initial to desired
     private void ZoomIn()
     {
-
+        if (desiredScale.magnitude > initialScale.magnitude)
+        {
+            transform.localScale *= zoomInRate;
+        }
+        else
+        {
+            CancelInvoke();
+        }
     }
 }

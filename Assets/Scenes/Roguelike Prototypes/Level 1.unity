@@ -326,7 +326,7 @@ MonoBehaviour:
   playerBounce: 0.75
   waypoints: {fileID: 0}
   debugSpawnWaves: 0
-  debugSpawnPortal: 0
+  debugSpawnPortal: 1
   debugSpawnPowerUp: 0
   debugPowerUpRepel: 0
 --- !u!1 &1102433872
