@@ -47,6 +47,10 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnIceWave();
         }
+        if (waveNumber > portalFirstAppearance || (GameManager.Instance.debugSpawnPortal = true && !gameObject.CompareTag("Portal")))
+        {
+            SetObjectActive(portalByWaveProbability, portal);
+        }
     }
 
     private void SpawnIceWave()
@@ -64,7 +68,11 @@ public class SpawnManager : MonoBehaviour
 
     private void SetObjectActive(float byWaveProbability, GameObject obj)
     {
-
+        if (Random.value < waveNumber * byWaveProbability * Time.deltaTime)
+        {
+            obj.transform.position = SetRandomPosition(-0.65f);
+            StartCoroutine(CountdownTimer(obj.tag));
+        }
     }
 
     private Vector3 SetRandomPosition(float posY)
@@ -75,8 +83,26 @@ public class SpawnManager : MonoBehaviour
         return new Vector3(Randomx, posY, Randomz);
     }
 
+    // Enables the portal, waits, and then disables the portal
     private IEnumerator CountdownTimer(string objectTag)
     {
-        yield return null;
+        float byWaveDuration = 0;
+        switch (objectTag)
+        {
+            case "Portal":
+                portal.SetActive(true);
+                portalActive = true;
+                byWaveDuration = portalByWaveDuration;
+                break;
+        }
+
+        yield return new WaitForSecondsRealtime(waveNumber * byWaveDuration);
+        switch (objectTag)
+        {
+            case "Portal":
+                portal.SetActive(false);
+                portalActive = false;
+                break;
+        }
     }
 }

@@ -695,9 +695,9 @@ MonoBehaviour:
   initialWave: 1
   increaseEachWave: 1
   maximumWave: 3
-  portalFirstAppearance: 0
-  portalByWaveProbability: 0
-  portalByWaveDuration: 0
+  portalFirstAppearance: 2
+  portalByWaveProbability: 0.03
+  portalByWaveDuration: 3
   powerUpFirstAppearence: 0
   powerUpByWaveProbability: 0
   powerUpByWaveDuration: 0

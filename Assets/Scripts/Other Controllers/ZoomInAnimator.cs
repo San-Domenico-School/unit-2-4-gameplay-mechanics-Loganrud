@@ -12,9 +12,9 @@ public class ZoomInAnimator : MonoBehaviour
     // Store the desired scale, set the initial scale, and then call ZoomIn
     private void OnEnable()
     {
-        transform.localScale = desiredScale;
+        desiredScale = transform.localScale;
         transform.localScale = initialScale;
-        InvokeRepeating("ZoomIn", 0.0f, zoomInRate);
+        InvokeRepeating("ZoomIn", 0, zoomInFrequency);
     }
  
     // Resets the current scale to the desired scale
@@ -26,7 +26,7 @@ public class ZoomInAnimator : MonoBehaviour
     // Slowly grow the scale from initial to desired
     private void ZoomIn()
     {
-        if (desiredScale.magnitude > initialScale.magnitude)
+        if (transform.localScale.magnitude <  desiredScale.magnitude)
         {
             transform.localScale *= zoomInRate;
         }
