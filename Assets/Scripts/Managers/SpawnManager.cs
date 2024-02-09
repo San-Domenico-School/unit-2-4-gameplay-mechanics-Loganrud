@@ -12,10 +12,15 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [Header("Objects to Spawn")]
-    [SerializeField] private GameObject iceSphere, portal, powerUp, player;
+    [SerializeField] private GameObject iceSphere;
+    [SerializeField] private GameObject portal;
+    [SerializeField] private GameObject powerUp;
+    [SerializeField] private GameObject player;
 
     [Header("Wave Fields")]
-    [SerializeField] private int initialWave, increaseEachWave, maximumWave;
+    [SerializeField] private int initialWave;
+    [SerializeField] private int increaseEachWave;
+    [SerializeField] private int maximumWave;
 
     [Header("Portal Fields")]
     [SerializeField] private int portalFirstAppearance;

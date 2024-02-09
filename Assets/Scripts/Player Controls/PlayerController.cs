@@ -102,12 +102,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Portal"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Portal");
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        
+        if (other.CompareTag("Portal"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("PLayer");
+            if (transform.position.y <= -1.65)
+            {
+                transform.position = Vector3.up * 25;
+
+            }
+        }
     }
 
     private IEnumerator PowerUpCooldown(float cooldown)
