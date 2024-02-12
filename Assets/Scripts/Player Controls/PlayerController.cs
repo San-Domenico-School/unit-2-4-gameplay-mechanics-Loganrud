@@ -59,6 +59,12 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        if (transform.position.y < -10f)
+        {
+            GameManager.Instance.gameOver = true;
+            Debug.Log("You Lost");
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnMovementPreformed(InputAction.CallbackContext value)
@@ -78,6 +84,7 @@ public class PlayerController : MonoBehaviour
         playerRB.drag = GameManager.Instance.playerDrag;
         moveForceMagnitude = GameManager.Instance.playerMoveForce;
         focalpoint = GameObject.Find("FocalPoint").transform;
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
     private void Move()
@@ -112,11 +119,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Portal"))
         {
-            gameObject.layer = LayerMask.NameToLayer("PLayer");
+            gameObject.layer = LayerMask.NameToLayer("Player");
             if (transform.position.y <= -1.65)
             {
                 transform.position = Vector3.up * 25;
-
+                GameManager.Instance.switchLevels = true;
             }
         }
     }
