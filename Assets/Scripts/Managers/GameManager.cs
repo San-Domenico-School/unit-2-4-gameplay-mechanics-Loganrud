@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Scene Fields")]
     public GameObject waypoints;
+    public float NumberOfLevel; 
 
     [Header("Debug Fields")]
     public bool debugSpawnWaves;
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
         if (nextLevel <= SceneManager.sceneCountInBuildSettings)
         {
             // Load the next scene
-            SceneManager.LoadScene("Level" + nextLevel.ToString());
+            SceneManager.LoadScene("Level " + nextLevel.ToString());
         }
 
         // If at the last level, ends the game. //*******   More will go here after Prototype  ******* //
