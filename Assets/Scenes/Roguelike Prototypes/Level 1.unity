@@ -324,12 +324,12 @@ MonoBehaviour:
   playerMoveForce: 120
   playerRepelForce: 2
   playerBounce: 0.75
-  waypoints: {fileID: 0}
+  waypoints: []
   NumberOfLevel: 2
   debugSpawnWaves: 0
-  debugSpawnPortal: 1
+  debugSpawnPortal: 0
   debugSpawnPowerUp: 0
-  debugPowerUpRepel: 1
+  debugPowerUpRepel: 0
 --- !u!1 &1102433872
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,8 +980,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623011244}
   serializedVersion: 4
-  m_Mass: 0.5
-  m_Drag: 0
+  m_Mass: 10
+  m_Drag: 0.2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

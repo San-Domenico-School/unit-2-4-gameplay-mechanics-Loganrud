@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     public float playerBounce;
 
     [Header("Scene Fields")]
-    public GameObject waypoints;
     public float NumberOfLevel; 
 
     [Header("Debug Fields")]
