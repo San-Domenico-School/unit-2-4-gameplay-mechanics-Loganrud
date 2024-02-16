@@ -324,7 +324,6 @@ MonoBehaviour:
   playerMoveForce: 120
   playerRepelForce: 2
   playerBounce: 0.75
-  waypoints: []
   NumberOfLevel: 2
   debugSpawnWaves: 0
   debugSpawnPortal: 0
