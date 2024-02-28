@@ -60,6 +60,10 @@ public class SpawnManager : MonoBehaviour
         {
             SetObjectActive(portalByWaveProbability, portal);
         }
+        if (waveNumber > powerUpFirstAppearence || (GameManager.Instance.debugSpawnPowerUp = true && !gameObject.CompareTag("PowerUp")))
+        {
+            SetObjectActive(powerUpByWaveProbability, powerUp);
+        }
     }
 
     private void SpawnIceWave()
@@ -103,6 +107,11 @@ public class SpawnManager : MonoBehaviour
                 portalActive = true;
                 byWaveDuration = portalByWaveDuration;
                 break;
+            case "PowerUp":
+                powerUp.SetActive(true);
+                powerUpActive = true;
+                byWaveDuration = powerUpByWaveDuration;
+                break;
         }
 
         yield return new WaitForSecondsRealtime(waveNumber * byWaveDuration);
@@ -111,6 +120,10 @@ public class SpawnManager : MonoBehaviour
             case "Portal":
                 portal.SetActive(false);
                 portalActive = false;
+                break;
+            case "PowerUp":
+                powerUp.SetActive(false);
+                powerUpActive = false;
                 break;
         }
     }
